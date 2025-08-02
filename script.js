@@ -101,7 +101,8 @@
        
              // Clear input field and scroll to the bottom
              inputField.value = '';
-             chatbox.scrollTop = chatbox.scrollHeight;
+             //chatbox.scrollTop = chatbox.scrollHeight;
+             chatbox.scrollIntoView({behaviour: "smooth", block: 'end'});
            }
 
            userInputField.addEventListener("keydown",function(event){
@@ -128,3 +129,4 @@
             head.style.color='#fff';
             head.style.textShadow='0 0 10px #fd053f';
            }
+
