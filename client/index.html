@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <title>Tekh-BoT AI</title>
+</head>
+
+<body data-theme="dark">
+
+  <!-- Application Header -->
+  <header>
+    <div class="logo-container">
+      <img src="https://res.cloudinary.com/dd7ec5m1r/image/upload/v1743444567/bot_eml3rl.png" alt="Bot Logo" class="brand-logo" />
+      <h1>Tekh-BoT</h1>
+      <span class="badge">Your AI Tech assistant</span>
+    </div>
+    <div class="theme-toggles">
+      <button class="theme-btn" onclick="toggleTheme()" id="theme-icon" title="Toggle Theme">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Chat History -->
+  <main id="chatbox" class="chat-container">
+    <div class="message-wrapper bot">
+      <div class="message">
+        <img src="https://res.cloudinary.com/dd7ec5m1r/image/upload/v1743444567/bot_eml3rl.png" class="avatar"/>
+        <div class="msg-content">Hello! I'm Tekh-BoT, your personal AI assistant. How can I help you today?</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Input Area -->
+  <div class="input-wrapper">
+    <div class="input-box">
+      <textarea id="userInput" placeholder="Message Tekh-BoT..." rows="1"></textarea>
+      <button id="sendBtn" onclick="sendMessage()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="disclaimer">Tekh-BoT can make mistakes. Consider verifying important information.</div>
+  </div>
+    
+  <script src="script.js"></script>
+</body>
+</html>

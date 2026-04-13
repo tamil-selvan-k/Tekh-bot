@@ -1,0 +1,33 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Tekh-bot backend server",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"No tests configured yet\"",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "lint": "echo \"No lint configured yet\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@huggingface/inference": "^4.13.15",
+    "@pinecone-database/pinecone": "^7.2.0",
+    "axios": "^1.15.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@ljharb/tsconfig": "^0.3.2",
+    "nodemon": "^3.1.4"
+  }
+}

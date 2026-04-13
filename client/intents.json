@@ -1,0 +1,607 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hello",
+        "helo",
+        "hlo",
+        "Hey",
+        "Good morning",
+        "Good Afternoon",
+        "Good After noon",
+        "Good evening",
+        "Hi, how can you help me"
+      ],
+      "responses": [
+        "Hello! How can I assist you with technical education today?",
+        "Hi there! What do you need help with?"
+      ]
+    },  
+    {
+      "tag":"SQL",
+      "patterns":[
+        "What is SQL", "SQL","Structured query language","what is sequel",
+        "What is structured query language","SQL","sequel"
+      ],
+      "responses":[
+        "Structured Query Language (SQL) or SEQUEL is a Database Management System(DBMS), that is used to store large collection of datas in the form of tables(i.e, rows and columns)."
+      ]
+    },{
+      "tag":"Python",
+      "patterns":[
+        "What is python","Python",
+        "Python programming language","Tell about python","Explain python"
+      ],
+      "responses":[
+            "Python is a high-level, interpreted programming language known for its simplicity, readability, and versatility. It was created by Guido van Rossum and first released in 1991. Python is widely used in various domains, including web development, data analysis, artificial intelligence, machine learning, automation, and more."
+      ]
+    },{
+      "tag":"Java",
+      "patterns":[
+        "What is java","Java",
+        "Java programming language","Tell about java","Explain java"
+      ],
+      "responses":[
+          "Java is a high-level, object-oriented, and platform-independent programming language. It was developed by James Gosling and released by Sun Microsystems in 1995. It is widely used for building applications ranging from mobile apps to large-scale enterprise systems."
+      ]
+    },
+    {
+      "tag":"JavaScript",
+      "patterns":[
+        "What is javascript","JavaScript",
+        "Javascript programming language","Tell about java script",
+        "Explain javascript"
+      ],
+      "responses":[
+          "JavaScript is a high-level, interpreted programming language primarily used to make websites dynamic and interactive. It was created by Brendan Eich in 1995 and has since become a core technology of the web, alongside HTML and CSS."
+      ]
+    },
+    {
+      "tag":"HTML",
+      "patterns":[
+        "What is HTML","HTML","Hypertext markup language","What is Hypertext markup language",
+        "HTML programming language","Tell about Html",
+        "Explain HTML","HTML web language"
+      ],
+      "responses":[
+          "HTML (HyperText Markup Language) is the standard language used to create the structure of web pages. It defines the content and layout of a webpage by using elements and tags."
+      ]
+    },
+    {
+      "tag":"CSS",
+      "patterns":[
+        "What is CSS","CSS","Cascading Style Sheets","What is Cascading Style Sheets",
+        "CSS programming language","Tell about CSS",
+        "Explain CSS","CSS language"
+      ],
+      "responses":[
+          "CSS (Cascading Style Sheets) is a stylesheet language used to control the presentation, design, and layout of a webpage. It works alongside HTML to style the elements."
+      ]
+    },
+    {
+      "tag":"ReactJs",
+      "patterns":[
+        "What is ReactJS","ReactJS",
+        "ReactJS programming language","Tell about ReactJS",
+        "Explain ReactJS","ReactJS language"
+      ],
+      "responses":[
+          "ReactJS is a JavaScript library developed by Facebook for building user interfaces, especially for single-page applications (SPAs). It allows developers to create reusable UI components and manage the state of applications efficiently."
+      ]
+    },{
+      "tag":"Node.js",
+      "patterns":[
+        "What is Nodejs","Nodejs","Node.js","What is Node.js",
+        "Node.js programming language","Tell about Node.js",
+        "Explain Node.js","Node.js language"
+      ],
+      "responses":[
+          "Node.js is an open-source, cross-platform runtime environment that allows developers to run JavaScript code on the server side. It is built on Google Chrome's V8 JavaScript engine and enables the creation of scalable, high-performance network applications."
+      ]
+    },{
+      "tag":"Madeby",
+      "patterns":[
+        "Who made you", "who discovered you","Who invented you",
+        "Who innovated you"
+      ],
+      "responses" :[
+        "I was Made by Byte Builders ....  1.Tamil Selvan.K 2.Yuvashree.B 3.Tholkappiyan.V 4.Sowmiya.M"
+      ]
+    },
+    {
+      "tag": "learning_materials",
+      "patterns": [
+        "Where can I get technical education",
+        "Where can I find free learning materials",
+        "Are there good books for technical education",
+        "What are some online resources for studying",
+        "Can you recommend tutorials for beginners"
+      ],
+      "responses": [
+        "You can find free resources on websites like Khan Academy, Coursera, and MIT OpenCourseWare. Books like 'Eloquent JavaScript' are great for beginners."
+      ]
+    },
+    {
+      "tag": "about_technical_education",
+      "patterns": [
+        "What is technical education",
+        "Explain technical education",
+        "What are the benefits of technical education?",
+        "Can you define technical education?"
+      ],
+      "responses": [
+        "Technical education focuses on developing practical skills and knowledge for specific trades or industries, such as IT, engineering, or healthcare."
+      ]
+    },
+    {
+      "tag": "courses_offered",
+      "patterns": [
+        "What courses are available in technical education?",
+        "List some technical education courses",
+        "Can you tell me about IT courses?",
+        "What engineering courses are there?",
+        "Are there any diploma courses in technical education?"
+      ],
+      "responses": [
+        "Popular courses include programming, data science, mechanical engineering, civil engineering, AI, robotics, and electrical systems."
+      ]
+    },
+    {
+      "tag": "admission_process",
+      "patterns": [
+        "How do I enroll in a technical course?",
+        "What is the admission process for technical education?",
+        "How can I apply for a technical course?",
+        "What documents are required for admission?"
+      ],
+      "responses": [
+        "Admission processes vary by institution but typically include an application form, proof of previous education, and, in some cases, an entrance test."
+      ]
+    },
+    {
+      "tag": "job_opportunities",
+      "patterns": [
+        "What jobs can I get after technical education?",
+        "What are the career opportunities in technical fields?",
+        "Can I get a job after a diploma?",
+        "What is the demand for technical jobs?"
+      ],
+      "responses": [
+        "Technical education opens up opportunities in IT, engineering, manufacturing, healthcare, and more. It depends on the course and skills you acquire."
+      ]
+    },
+    {
+      "tag": "fees_structure",
+      "patterns": [
+        "What is the fee for technical courses?",
+        "How much do diploma courses cost?",
+        "Are technical courses expensive?",
+        "What is the average cost of a technical course?"
+      ],
+      "responses": [
+        "The fees vary widely depending on the course and institution. Some diploma courses are affordable, while specialized courses like AI may cost more."
+      ]
+    },
+    {
+      "tag": "duration_of_courses",
+      "patterns": [
+        "How long does it take to complete a technical course?",
+        "What is the duration of diploma courses?",
+        "Are there short-term technical courses?",
+        "How long are technical education programs?"
+      ],
+      "responses": [
+        "The duration can range from 6 months for short-term courses to 4 years for degree programs like engineering."
+      ]
+    },
+    {
+      "tag": "scholarships",
+      "patterns": [
+        "Are there scholarships for technical education?",
+        "How can I apply for a scholarship?",
+        "Are there any financial aid programs?",
+        "Does technical education provide financial assistance?"
+      ],
+      "responses": [
+        "Yes, many institutions offer scholarships based on merit or need. You can apply through the institution or government programs."
+      ]
+    },
+    {
+      "tag": "online_courses",
+      "patterns": [
+        "Are there online technical courses?",
+        "Can I study technical education online?",
+        "What are some good online platforms for technical education?",
+        "Is online technical education effective?"
+      ],
+      "responses": [
+        "Yes, platforms like Coursera, Udemy, and edX offer a wide range of online technical courses. Online learning can be very effective with self-discipline."
+      ]
+    },
+    {
+      "tag": "certifications",
+      "patterns": [
+        "What certifications are available in technical education?",
+        "Can I get certified in AI?",
+        "What is the value of technical certifications?",
+        "Are certifications necessary for jobs?"
+      ],
+      "responses": [
+        "Certifications like AWS, Cisco, Microsoft, and CompTIA are valuable in the job market. They validate your skills and improve your employability."
+      ]
+    },
+    {
+      "tag":"about_tekhbot",
+      "patterns":[
+        "Who are you",
+        "who is this",
+        "What is your name",
+        "Your name"
+
+      ],
+      "responses":[
+        "I am your technical assistant chatbot, here to help you with all your queries related to technology, programming, and more!",
+        "I am Tech-boT, and I'm here to assist you with technical education, programming, and all things tech-related. How can I help you today?"
+      ]
+    },{
+      "tag" : "Tekh-boT_meaning",
+      "patterns":[
+        "What is the meaning of your name",
+        "meaning of your name",
+        "your name meaning",
+        "what your name meaning",
+        "What is mean by Tekh"
+      ],
+      "responses":[
+        "My name is Tekh-BoT in which Tekh is Armenian word and Bot means that I am your Technical Assistant.",
+        "Tekh is the Armenian word and Bot means that I am yout Technical Assistant"
+      ]
+    },
+    {
+      "tag": "entrance_exams",
+      "patterns": [
+        "Are there entrance exams for technical courses?",
+        "What exams do I need to take for admission?",
+        "Do all institutions require entrance tests?",
+        "What are some common technical education exams?"
+      ],
+      "responses": [
+        "Yes, exams like JEE, GATE, and state-level tests are common for technical courses. Some institutions also have their own entrance exams."
+      ]
+    },
+    {
+      "tag": "programming_languages",
+      "patterns": [
+        "What programming languages should I learn?",
+        "Is Python good for beginners?",
+        "Which languages are used in web development?",
+        "What is the best language for AI?"
+      ],
+      "responses": [
+        "For beginners, Python is a great choice. Web development involves HTML, CSS, JavaScript, and backend languages like PHP or Node.js. For AI, Python is most commonly used."
+      ]
+    },
+    {
+      "tag": "difference_diploma_degree",
+      "patterns": [
+        "What is the difference between a diploma and a degree?",
+        "Should I choose a diploma or a degree?",
+        "Is a diploma sufficient for jobs?",
+        "Which is better, degree or diploma?"
+      ],
+      "responses": [
+        "A diploma is typically shorter and more skill-focused, while a degree provides in-depth theoretical knowledge. The choice depends on your career goals."
+      ]
+    },
+    {
+      "tag": "future_technologies",
+      "patterns": [
+        "What are the future technologies in technical education?",
+        "What should I learn for future jobs?",
+        "Is AI a good career?",
+        "What are the latest trends in technical education?"
+      ],
+      "responses": [
+        "Emerging fields include AI, machine learning, data science, blockchain, IoT, and robotics. These fields have significant growth potential."
+      ]
+    },
+    {
+      "tag": "soft_skills",
+      "patterns": [
+        "Are soft skills important in technical education?",
+        "Soft skills",
+        "What soft skills should I learn?",
+        "How can I improve my communication skills?",
+        "Do technical jobs require teamwork?"
+      ],
+      "responses": [
+        "Yes, soft skills like communication, teamwork, problem-solving, and adaptability are essential in technical roles to complement your technical expertise."
+      ]
+    },
+    {
+      "tag": "exam_preparation",
+      "patterns": [
+        "How should I prepare for technical exams?",
+        "exam preparation",
+        "What are the best tips for GATE preparation?",
+        "Can you suggest some study materials for technical exams?",
+        "Are online mock tests helpful?"
+      ],
+      "responses": [
+        "Consistent practice, reviewing past papers, and using reliable study materials can help. Mock tests are excellent for assessing your readiness."
+      ]
+    },
+      {
+        "tag": "internships",
+        "patterns": [
+          "Are internships part of technical education?",
+          "internships",
+          "Can I do an internship while studying?",
+          "How do I find internships?",
+          "Are internships mandatory for technical courses?"
+        ],
+        "responses": [
+          "Many technical courses include internships as part of the curriculum. They are a great way to gain real-world experience."
+        ]
+      },
+      {
+        "tag": "apprenticeships",
+        "patterns": [
+          "What is the difference between an apprenticeship and an internship?",
+          "Are apprenticeships available for technical students?",
+          "How do I apply for an apprenticeship?",
+          "What are the benefits of apprenticeships?"
+        ],
+        "responses": [
+          "Apprenticeships are longer and more structured than internships, focusing on hands-on skills. They often lead to permanent roles."
+        ]
+      },
+      {
+        "tag": "technical_education_abroad",
+        "patterns": [
+          "Can I pursue technical education abroad?",
+          "technical education in abroad",
+          "What are the best countries for technical education?",
+          "What are the admission requirements for international universities?",
+          "How do I get a student visa for technical education?"
+        ],
+        "responses": [
+          "Yes, countries like the USA, Germany, and Canada are popular for technical education. Requirements include academic transcripts, language tests, and a visa."
+        ]
+      },
+      {
+        "tag": "entrepreneurship",
+        "patterns": [
+          "Can I start a business after technical education?",
+          "entrepreneurship",
+          "What skills do I need for entrepreneurship?",
+          "Is technical education helpful for entrepreneurs?",
+          "Are there courses in entrepreneurship?"
+        ],
+        "responses": [
+          "Technical education equips you with problem-solving and technical skills that are crucial for entrepreneurship. Many programs also offer business management courses."
+        ]
+      },
+      {
+        "tag": "technical_skills",
+        "patterns": [
+          "What are the most in-demand technical skills?",
+          "technical skills",
+          "Can you list some essential technical skills?",
+          "How do I develop technical skills?",
+          "Are technical skills more important than soft skills?"
+        ],
+        "responses": [
+          "In-demand technical skills include coding, data analysis, cloud computing, and network security. Both technical and soft skills are equally important."
+        ]
+      },
+      {
+        "tag": "industrial_training",
+        "patterns": [
+          "What is industrial training?",
+          "Is industrial training part of technical education?",
+          "Can you suggest companies for industrial training?",
+          "How does industrial training benefit students?"
+        ],
+        "responses": [
+          "Industrial training involves hands-on experience in a real-world work environment, helping students bridge the gap between theory and practice."
+        ]
+      },
+      {
+        "tag": "technical_education_for_girls",
+        "patterns": [
+          "Are there specific technical programs for girls?",
+          "What are the opportunities for girls in technical education?",
+          "Is technical education suitable for women?",
+          "Can girls pursue mechanical engineering?"
+        ],
+        "responses": [
+          "Technical education is for everyone. Many institutions and organizations offer scholarships and programs encouraging women to join technical fields."
+        ]
+      },
+      {
+        "tag": "government_schemes",
+        "patterns": [
+          "Are there any government schemes for technical education?",
+          "What government programs support technical education?",
+          "Can I get a subsidy for technical education?",
+          "Are there government loans for technical students?"
+        ],
+        "responses": [
+          "Yes, schemes like Skill India and PMKVY support technical education. Government loans and subsidies are also available for eligible students."
+        ]
+      },
+      {
+        "tag": "career_guidance",
+        "patterns": [
+          "Can you help me choose a career in technical education?",
+          "What is the best career in technical fields?",
+          "How do I decide on a technical course?",
+          "Are career counselors available in technical colleges?"
+        ],
+        "responses": [
+          "Career counseling services are often available in institutions. Identifying your interests and goals is key to selecting the right path."
+        ]
+      },
+      {
+        "tag": "coding_challenges",
+        "patterns": [
+          "How can I participate in coding competitions?",
+          "What are some popular coding platforms?",
+          "Can coding challenges improve my skills?",
+          "Are there online coding competitions?"
+        ],
+        "responses": [
+          "Platforms like HackerRank, LeetCode, and Codeforces offer coding challenges. Competitions like Google Code Jam and ACM ICPC are great for skill enhancement."
+        ]
+      },
+      {
+        "tag": "tools_and_software",
+        "patterns": [
+          "What tools are used in technical education?",
+          "Can you recommend software for programming?",
+          "What are the best tools for graphic design?",
+          "Which software is essential for engineering students?"
+        ],
+        "responses": [
+          "Popular tools include AutoCAD for engineering, Adobe Suite for design, and IDEs like VS Code and PyCharm for programming."
+        ]
+      },
+      {
+        "tag": "hackathons",
+        "patterns": [
+          "What is a hackathon?",
+          "Are hackathons helpful for technical students?",
+          "How do I participate in hackathons?",
+          "Can beginners join hackathons?"
+        ],
+        "responses": [
+          "Hackathons are events where students collaborate to solve problems or build projects in a short time. They are great for learning and networking."
+        ]
+      },
+      {
+        "tag": "technical_events",
+        "patterns": [
+          "What are some popular technical events?",
+          "Can you suggest technical events for students?",
+          "Are there technical workshops I can join?",
+          "How do I find webinars on technical education?"
+        ],
+        "responses": [
+          "Events like TechCrunch Disrupt, IEEE conferences, and local hackathons are excellent opportunities to learn and connect with professionals."
+        ]
+      },
+      {
+        "tag": "ethical_hacking",
+        "patterns": [
+          "What is ethical hacking?",
+          "Can I learn ethical hacking online?",
+          "Are there certifications for ethical hacking?",
+          "What are the career options in ethical hacking?"
+        ],
+        "responses": [
+          "Ethical hacking involves testing systems for vulnerabilities. Certifications like CEH and CompTIA Security+ can help you enter this field."
+        ]
+      },
+      {
+        "tag": "project_guidance",
+        "patterns": [
+          "Can you suggest a project for final year?",
+          "What are some innovative project ideas?",
+          "How do I choose a project topic?",
+          "Are group projects better than individual ones?"
+        ],
+        "responses": [
+          "Innovative ideas include IoT-based home automation, AI chatbots, and blockchain apps. Choose a topic you're passionate about and align it with your career goals."
+        ]
+      },
+      {
+        "tag": "exam_preparation_tips",
+        "patterns": [
+          "How do I prepare for my exams?",
+          "Can you give me tips for technical exams?",
+          "What is the best way to study for exams?",
+          "Are mock tests helpful for preparation?"
+        ],
+        "responses": [
+          "Practice consistently, focus on key topics, and use mock tests to identify weak areas. Time management is crucial during preparation."
+        ]
+      }
+    ,
+      {
+        "tag": "factorial_program",
+        "patterns": ["How to calculate factorial?"
+                     ,"factorial program",
+                      "Write a factorial program", "Factorial of a number in Python"],
+        "responses": [
+          "Here is a Python program to calculate factorial:\\n```python\\nn = int(input('Enter a number: '))\\nfactorial = 1\\nfor i in range(1, n + 1):\\nfactorial *= i\\nprint('Factorial:', factorial)```\\n"
+        ]
+      },
+      {
+        "tag": "prime_check",
+        "patterns": ["Check if a number is prime", "Prime number program", "Is this number prime?"],
+        "responses": [
+          "Here is a Python program to check if a number is prime:\\n```python\\nnum = int(input('Enter a number: '))\\nif num > 1:\\n    for i in range(2, int(num ** 0.5) + 1):\\n        if num % i == 0:\\n            print('Not a prime number')\\n            break\\n    else:\\n        print('Prime number')\\nelse:\\n    print('Not a prime number')\\n```"
+        ]
+      },
+      {
+        "tag": "fibonacci_series",
+        "patterns": ["Generate Fibonacci series", "Fibonacci series program", "Print Fibonacci numbers"],
+        "responses": [
+          "Here is a Python program to generate the Fibonacci series:\\n```python\\nn = int(input('Enter the number of terms: '))\\na, b = 0, 1\\nfor _ in range(n):\\n    print(a, end=' ')\\n    a, b = b, a + b\\n```"
+        ]
+      },
+      {
+        "tag": "palindrome_check",
+        "patterns": ["Check if a string is palindrome", "Palindrome program", "Is this string a palindrome?"],
+        "responses": [
+          "Here is a Python program to check if a string is a palindrome:\\n```python\\nstring = input('Enter a string: ')\\nif string == string[::-1]:\\n    print('Palindrome')\\nelse:\\n    print('Not a palindrome')\\n```"
+        ]
+      },
+      {
+        "tag": "reverse_string",
+        "patterns": ["Reverse a string", "Write a program to reverse a string", "String reversal program"],
+        "responses": [
+          "Here is a Python program to reverse a string:\\n```python\\nstring = input('Enter a string: ')\\nreversed_string = string[::-1]\\nprint('Reversed string:', reversed_string)\\n```"
+        ]
+      },
+      {
+        "tag": "sum_of_digits",
+        "patterns": ["Find the sum of digits of a number", "Sum of digits program", "Add the digits of a number"],
+        "responses": [
+          "Here is a Python program to find the sum of digits:\\n```python\\nnum = int(input('Enter a number: '))\\nsum_digits = sum(int(digit) for digit in str(num))\\nprint('Sum of digits:', sum_digits)\\n```"
+        ]
+      },
+      {
+        "tag": "leap_year_check",
+        "patterns": ["Check if a year is a leap year", "Leap year program", "Is this year a leap year?"],
+        "responses": [
+          "Here is a Python program to check if a year is a leap year:\\n```python\\nyear = int(input('Enter a year: '))\\nif (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):\\n    print('Leap year')\\nelse:\\n    print('Not a leap year')\\n```"
+        ]
+      },
+      {
+        "tag": "armstrong_number",
+        "patterns": ["Check if a number is an Armstrong number", "Armstrong number program", "Is this number an Armstrong number?"],
+        "responses": [
+          "Here is a Python program to check if a number is an Armstrong number:\\n```python\\nnum = int(input('Enter a number: '))\\nsum_of_cubes = sum(int(digit) ** 3 for digit in str(num))\\nif num == sum_of_cubes:\\n    print('Armstrong number')\\nelse:\\n    print('Not an Armstrong number')\\n```"
+        ]
+      },
+      {
+        "tag": "largest_of_three",
+        "patterns": ["Find the largest of three numbers", "Largest number program", "Largest of three numbers"],
+        "responses": [
+          "Here is a Python program to find the largest of three numbers:\n```python\na, b, c = map(int, input('Enter three numbers: ').split())\nprint('Largest number:', max(a, b, c))\n```"
+        ]
+      },
+      {
+        "tag": "sort_list",
+        "patterns": ["Sort a list of numbers", "Write a sorting program", "List sorting program"],
+        "responses": [
+          "Here is a Python program to sort a list:\n```python\nnumbers = list(map(int, input('Enter numbers separated by spaces: ').split()))\nnumbers.sort()\nprint('Sorted list:', numbers)\n```"
+        ]
+      }
+    ]
+  }
+  
