@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/v1/chat/message";
+const API_URL = "https://tekh-bot.vercel.app/api/v1/chat/message";
 
 const userInputField = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
