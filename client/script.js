@@ -59,6 +59,22 @@ userInputField.addEventListener("keydown", function(event) {
   }
 });
 
+// New Chat Functionality
+function startNewChat() {
+  const isConfirmed = confirm("Are you sure you want to start a new chat? Your current chat cannot be recovered.");
+  if (isConfirmed) {
+    // Drop memory
+    chatHistory = [];
+    localStorage.removeItem("chatHistory");
+    
+    // Wipe UI
+    chatbox.innerHTML = '';
+    
+    // Inject default initial greeting
+    appendBotMessageDOM("Hello! I'm Tekh-BoT, your personal AI assistant. How can I help you today?", false);
+  }
+}
+
 // Theme Management
 function toggleTheme() {
   const body = document.body;
