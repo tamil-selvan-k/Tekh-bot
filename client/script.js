@@ -3,8 +3,13 @@ const API_URL = "https://tekh-bot.vercel.app/api/v1/chat/message";
 const userInputField = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
 const chatbox = document.getElementById("chatbox");
+const scrollToBottomBtn = document.getElementById("scrollToBottomBtn");
 let isWaitingForResponse = false;
 let chatHistory = [];
+const SCROLL_BOTTOM_THRESHOLD = 80;
+let autoScrollEnabled = true;
+let isProgrammaticScroll = false;
+let activeStreamFinalizer = null;
 
 // Initialize Theme & Chat History on page load
 window.addEventListener("DOMContentLoaded", () => {
@@ -34,7 +39,29 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
   
-  scrollToBottom();
+  scrollToBottom({ force: true, behavior: "auto" });
+  updateScrollToBottomButton();
+});
+
+chatbox.addEventListener("scroll", () => {
+  if (isProgrammaticScroll) return;
+  autoScrollEnabled = isNearBottom();
+  updateScrollToBottomButton();
+});
+
+if (scrollToBottomBtn) {
+  scrollToBottomBtn.addEventListener("click", () => {
+    autoScrollEnabled = true;
+    scrollToBottom({ force: true });
+    updateScrollToBottomButton();
+  });
+}
+
+document.addEventListener("visibilitychange", () => {
+  // Browsers throttle animation frames in background tabs, so finalize active stream immediately.
+  if (document.hidden && typeof activeStreamFinalizer === "function") {
+    activeStreamFinalizer();
+  }
 });
 
 // Auto-expand textarea
@@ -72,6 +99,7 @@ function startNewChat() {
     
     // Inject default initial greeting
     appendBotMessageDOM("Hello! I'm Tekh-BoT, your personal AI assistant. How can I help you today?", false);
+    scrollToBottom({ force: true, behavior: "auto" });
   }
 }
 
@@ -113,8 +141,8 @@ async function sendMessage() {
   sendBtn.classList.add("disabled");
 
   // Display user's message and save it globally
-  appendUserMessageDOM(userMessage);
   saveHistory("user", userMessage);
+  appendUserMessageDOM(userMessage);
 
   // Clear input field, reset height
   userInputField.value = "";
@@ -133,7 +161,7 @@ async function sendMessage() {
     </div>
   `;
   chatbox.appendChild(loaderDiv);
-  scrollToBottom();
+  scrollToBottom({ force: true });
 
   // Cycle engaging wait texts
   const loaderTexts = ["Analyzing context...", "Searching knowledge base...", "Generating response...", "Just a moment..."];
@@ -173,10 +201,12 @@ async function sendMessage() {
       if (el.dataset.intervalId) clearInterval(el.dataset.intervalId);
       el.remove();
     });
-    
-    // Display bot's response
-    appendBotMessageDOM(botReply, true);
+
+    // Persist immediately so tab switches do not lose bot responses.
     saveHistory("bot", botReply);
+    
+    // Display bot's response with a streaming effect
+    await appendBotMessageDOM(botReply, { animateFade: true, stream: true });
 
   } catch (error) {
     console.error("Error communicating with AI server:", error);
@@ -208,16 +238,14 @@ function appendUserMessageDOM(text) {
     </div>
   `;
   chatbox.appendChild(wrapper);
-  scrollToBottom();
+  scrollToBottom({ force: true });
 }
 
-function appendBotMessageDOM(markdownText, animateFade = false) {
+function createBotMessageShell(animateFade = false) {
   const wrapper = document.createElement("div");
   wrapper.className = "message-wrapper bot";
   // Add fade-up class conditionally
   if (animateFade) wrapper.classList.add("fade-up");
-  
-  const parsedHTML = marked.parse(markdownText);
 
   const innerMessage = document.createElement("div");
   innerMessage.className = "message";
@@ -234,9 +262,10 @@ function appendBotMessageDOM(markdownText, animateFade = false) {
   wrapper.appendChild(innerMessage);
   chatbox.appendChild(wrapper);
 
-  content.innerHTML = parsedHTML;
-  
-  // Attach Copy Buttons to all code blocks
+  return content;
+}
+
+function attachCopyButtons(content) {
   const preElements = content.querySelectorAll("pre");
   preElements.forEach((pre) => {
     const codeEl = pre.querySelector("code");
@@ -260,6 +289,108 @@ function appendBotMessageDOM(markdownText, animateFade = false) {
       pre.appendChild(copyBtn);
     }
   });
+}
+
+function getNextChunk(text, index) {
+  const remaining = text.length - index;
+  if (remaining <= 0) return "";
+
+  const currentChar = text[index];
+
+  // Keep markdown structure intact while streaming.
+  if (currentChar === "\n") return "\n";
+  if (text.slice(index, index + 3) === "```") return "```";
+
+  // Group words for smooth but readable token streaming.
+  const maxChunk = Math.min(remaining, 5);
+  let chunkSize = 1;
+
+  for (let i = 1; i <= maxChunk; i += 1) {
+    const ch = text[index + i - 1];
+    if (ch === " " || ch === "\n") {
+      chunkSize = i;
+      break;
+    }
+
+    chunkSize = i;
+    if (i === 5 || /[.,!?;:)]/.test(ch)) break;
+  }
+
+  return text.slice(index, index + chunkSize);
+}
+
+async function streamBotMessage(content, markdownText) {
+  let index = 0;
+  let visibleText = "";
+  const cursor = '<span class="streaming-cursor"></span>';
+
+  return new Promise((resolve) => {
+    let completed = false;
+
+    const finalizeStream = () => {
+      if (completed) return;
+      completed = true;
+      activeStreamFinalizer = null;
+      content.innerHTML = marked.parse(markdownText);
+      attachCopyButtons(content);
+      scrollToBottom();
+      resolve();
+    };
+
+    activeStreamFinalizer = finalizeStream;
+
+    function tick() {
+      if (completed) {
+        return;
+      }
+
+      if (index >= markdownText.length) {
+        finalizeStream();
+        return;
+      }
+
+      const chunk = getNextChunk(markdownText, index);
+      visibleText += chunk;
+      index += chunk.length;
+
+      content.innerHTML = marked.parse(visibleText) + cursor;
+      scrollToBottom();
+
+      const lastChar = chunk[chunk.length - 1] || "";
+      let delay = 16;
+
+      if (lastChar === "\n") delay = 35;
+      else if (/[.,!?]/.test(lastChar)) delay = 45;
+      else if (chunk.includes("```")) delay = 24;
+
+      setTimeout(tick, delay);
+    }
+
+    // Render immediately if the tab is hidden; otherwise animate progressively.
+    if (document.hidden) {
+      finalizeStream();
+      return;
+    }
+
+    setTimeout(tick, 0);
+  });
+}
+
+async function appendBotMessageDOM(markdownText, options = {}) {
+  const normalizedOptions = typeof options === "boolean"
+    ? { animateFade: options, stream: false }
+    : (options || {});
+  const { animateFade = false, stream = false } = normalizedOptions;
+
+  const content = createBotMessageShell(animateFade);
+
+  if (stream) {
+    await streamBotMessage(content, markdownText);
+    return;
+  }
+
+  content.innerHTML = marked.parse(markdownText);
+  attachCopyButtons(content);
 
   scrollToBottom();
 }
@@ -277,10 +408,31 @@ function appendErrorMessage(text) {
   scrollToBottom();
 }
 
-function scrollToBottom() {
+function isNearBottom() {
+  const distanceFromBottom = chatbox.scrollHeight - (chatbox.scrollTop + chatbox.clientHeight);
+  return distanceFromBottom <= SCROLL_BOTTOM_THRESHOLD;
+}
+
+function updateScrollToBottomButton() {
+  if (!scrollToBottomBtn) return;
+  const shouldShow = !isNearBottom();
+  scrollToBottomBtn.classList.toggle("visible", shouldShow);
+}
+
+function scrollToBottom(options = {}) {
+  const { force = false, behavior = "smooth" } = options;
+  if (!force && !autoScrollEnabled) return;
+
+  isProgrammaticScroll = true;
   chatbox.scrollTo({
     top: chatbox.scrollHeight,
-    behavior: "smooth"
+    behavior
+  });
+
+  requestAnimationFrame(() => {
+    isProgrammaticScroll = false;
+    autoScrollEnabled = isNearBottom();
+    updateScrollToBottomButton();
   });
 }
 

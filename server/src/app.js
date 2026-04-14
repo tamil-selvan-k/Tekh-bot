@@ -5,10 +5,14 @@ const morgan = require('morgan');
 
 const env = require('./config/env');
 const routes = require('./routes');
+const { chatRateLimiter } = require('./middlewares/rate-limit');
 const notFound = require('./middlewares/not-found');
 const errorHandler = require('./middlewares/error-handler');
 
 const app = express();
+
+// Required when deployed behind a reverse proxy so req.ip resolves to the actual client IP.
+app.set('trust proxy', env.nodeEnv === 'production');
 
 let corsOrigin = env.clientUrl;
 
@@ -38,6 +42,7 @@ app.get('/', (req, res) => {
   });
 });
 
+app.use('/api/v1/chat', chatRateLimiter);
 app.use('/api/v1', routes);
 
 app.use(notFound);

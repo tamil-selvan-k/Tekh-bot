@@ -43,6 +43,7 @@ body {
   height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow: hidden;
+  padding-bottom: 20px; /* Space for input */
 }
 
 /* Header */
@@ -199,6 +200,54 @@ header {
 
 .error { color: #eb5757; font-weight: 500; }
 
+.streaming-cursor {
+  display: inline-block;
+  width: 0.5ch;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background-color: var(--text-main);
+  border-radius: 1px;
+  animation: blinkCursor 1s steps(1) infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 45% { opacity: 1; }
+  46%, 100% { opacity: 0; }
+}
+
+.scroll-to-bottom-btn {
+  position: fixed;
+  right: 28px;
+  bottom: 112px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--input-border);
+  border-radius: 999px;
+  background: var(--chat-bot-bg);
+  color: var(--text-main);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+  z-index: 20;
+}
+
+.scroll-to-bottom-btn.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-to-bottom-btn:hover {
+  background: var(--input-bg);
+}
+
 /* Input */
 .input-wrapper {
   padding: 16px 20px;
@@ -304,4 +353,10 @@ textarea::placeholder { color: var(--text-muted); }
   #sendBtn { width: 30px; height: 30px; margin-bottom: 2px; }
   .disclaimer { font-size: 0.65rem; margin-top: 5px; }
   .msg-content pre { padding: 10px; font-size: 0.85rem; }
+  .scroll-to-bottom-btn {
+    right: 14px;
+    bottom: 88px;
+    width: 36px;
+    height: 36px;
+  }
 }
