@@ -11,23 +11,19 @@ let autoScrollEnabled = true;
 let isProgrammaticScroll = false;
 let activeStreamFinalizer = null;
 
-// Initialize Theme & Chat History on page load
 window.addEventListener("DOMContentLoaded", () => {
-  // 1. Theme Loading
   const savedTheme = localStorage.getItem("theme") || "dark";
   document.body.setAttribute("data-theme", savedTheme);
   updateThemeIcon(savedTheme);
 
-  // 2. Load Chat History
   const savedHistory = localStorage.getItem("chatHistory");
   if (savedHistory) {
     try {
       chatHistory = JSON.parse(savedHistory);
-      // Remove the hardcoded initial greeting to prevent duplicates, or we just leave the hardcoded one in HTML.
-      // To strictly match localStorage, let's clear the chatbox and render all stored history instead.
+
       const hasRealHistory = chatHistory.some(msg => msg.role === 'user');
       if (hasRealHistory) {
-        chatbox.innerHTML = ''; // Clear default HTML greeting if there is a real session
+        chatbox.innerHTML = '';
         chatHistory.forEach(msg => {
           if (msg.role === "user") appendUserMessageDOM(msg.content);
           else appendBotMessageDOM(msg.content, false);
@@ -58,13 +54,12 @@ if (scrollToBottomBtn) {
 }
 
 document.addEventListener("visibilitychange", () => {
-  // Browsers throttle animation frames in background tabs, so finalize active stream immediately.
+  // Finalize active stream when tab goes hidden to avoid throttling stalls.
   if (document.hidden && typeof activeStreamFinalizer === "function") {
     activeStreamFinalizer();
   }
 });
 
-// Auto-expand textarea
 userInputField.addEventListener("input", function() {
   this.style.height = "auto";
   this.style.height = (this.scrollHeight) + "px";
@@ -76,7 +71,6 @@ userInputField.addEventListener("input", function() {
   }
 });
 
-// Handle Enter key (Shift+Enter for newline)
 userInputField.addEventListener("keydown", function(event) {
   if (event.key === "Enter" && !event.shiftKey) {
     event.preventDefault();
@@ -86,24 +80,19 @@ userInputField.addEventListener("keydown", function(event) {
   }
 });
 
-// New Chat Functionality
 function startNewChat() {
   const isConfirmed = confirm("Are you sure you want to start a new chat? Your current chat cannot be recovered.");
   if (isConfirmed) {
-    // Drop memory
     chatHistory = [];
     localStorage.removeItem("chatHistory");
-    
-    // Wipe UI
+
     chatbox.innerHTML = '';
-    
-    // Inject default initial greeting
+
     appendBotMessageDOM("Hello! I'm Tekh-BoT, your personal AI assistant. How can I help you today?", false);
     scrollToBottom({ force: true, behavior: "auto" });
   }
 }
 
-// Theme Management
 function toggleTheme() {
   const body = document.body;
   const currentTheme = body.getAttribute("data-theme");
@@ -140,15 +129,12 @@ async function sendMessage() {
   isWaitingForResponse = true;
   sendBtn.classList.add("disabled");
 
-  // Display user's message and save it globally
   saveHistory("user", userMessage);
   appendUserMessageDOM(userMessage);
 
-  // Clear input field, reset height
   userInputField.value = "";
   userInputField.style.height = "auto";
-  
-  // Display an engaging loading indicator bubble
+
   const loaderDiv = document.createElement("div");
   loaderDiv.className = "message-wrapper bot fade-up loading-wrapper";
   loaderDiv.innerHTML = `
@@ -163,18 +149,15 @@ async function sendMessage() {
   chatbox.appendChild(loaderDiv);
   scrollToBottom({ force: true });
 
-  // Cycle engaging wait texts
   const loaderTexts = ["Analyzing context...", "Searching knowledge base...", "Generating response...", "Just a moment..."];
   let loaderIndex = 0;
   const loadingTextEl = loaderDiv.querySelector(".loading-text");
-  
-  // Attach the interval ID to the loader div so we can clear it later
+
   loaderDiv.dataset.intervalId = setInterval(() => {
     loaderIndex = (loaderIndex + 1) % loaderTexts.length;
     if (loadingTextEl) loadingTextEl.innerText = loaderTexts[loaderIndex];
   }, 2500);
 
-  // Pick the last 6 messages (3 interactions: user/bot, user/bot, user/bot) to act as context length
   const recentHistory = chatHistory.slice(-6);
 
   try {
@@ -195,17 +178,15 @@ async function sendMessage() {
       botReply = data.message;
     }
 
-    // Remove loading indicator
     const loaders = document.querySelectorAll('.loading-wrapper');
     loaders.forEach(el => {
       if (el.dataset.intervalId) clearInterval(el.dataset.intervalId);
       el.remove();
     });
 
-    // Persist immediately so tab switches do not lose bot responses.
+    // Save before animation so responses are not lost on tab switches/reloads.
     saveHistory("bot", botReply);
-    
-    // Display bot's response with a streaming effect
+
     await appendBotMessageDOM(botReply, { animateFade: true, stream: true });
 
   } catch (error) {
@@ -244,7 +225,6 @@ function appendUserMessageDOM(text) {
 function createBotMessageShell(animateFade = false) {
   const wrapper = document.createElement("div");
   wrapper.className = "message-wrapper bot";
-  // Add fade-up class conditionally
   if (animateFade) wrapper.classList.add("fade-up");
 
   const innerMessage = document.createElement("div");
@@ -297,11 +277,9 @@ function getNextChunk(text, index) {
 
   const currentChar = text[index];
 
-  // Keep markdown structure intact while streaming.
   if (currentChar === "\n") return "\n";
   if (text.slice(index, index + 3) === "```") return "```";
 
-  // Group words for smooth but readable token streaming.
   const maxChunk = Math.min(remaining, 5);
   let chunkSize = 1;
 
@@ -366,7 +344,7 @@ async function streamBotMessage(content, markdownText) {
       setTimeout(tick, delay);
     }
 
-    // Render immediately if the tab is hidden; otherwise animate progressively.
+    // Background tabs are throttled; complete immediately instead of stalling.
     if (document.hidden) {
       finalizeStream();
       return;
