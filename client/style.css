@@ -40,10 +40,9 @@ body {
   color: var(--text-main);
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow: hidden;
-  padding-bottom: 20px; /* Space for input */
 }
 
 /* Header */
